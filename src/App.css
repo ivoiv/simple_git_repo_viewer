@@ -1,0 +1,15 @@
+/*********************************
+ * Basic global CSS
+*********************************/
+
+body {
+  margin: auto;
+  font-family: sans-serif;
+  width:1248px
+}
+
+@media only screen and (max-width: 1280px){
+  body{
+    width:100%
+  }
+}
