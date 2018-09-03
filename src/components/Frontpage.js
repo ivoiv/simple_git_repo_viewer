@@ -9,13 +9,14 @@ import ErrorIcon from "@material-ui/icons/Error";
 
 
 //Number of repositires to be shown per page
-const REPOS_PER_PAGE = 20;
+const REPOS_PER_PAGE = 5;
+const VISIBLE_PAGES = 5;
 
 export default class Frontpage extends React.Component {
 
     
   //Once component will be shown 
-  componentWillMount() {
+  componentDidMount() {
     const { history, API_getGithubRepos, match:{params :{ number } }} = this.props
     const initial_page = parseInt(number, 10)
 
@@ -38,6 +39,7 @@ export default class Frontpage extends React.Component {
   }
 
 
+
   //Creates page buttons and links (1, 2, 3, 4, etc.)
   //For use with nagivation creator under.
   makePageButtons() {
@@ -45,9 +47,23 @@ export default class Frontpage extends React.Component {
     
     const num_pages = repositories.length / REPOS_PER_PAGE;
     var pages = [];
+    
+    var pageRange = Math.floor((VISIBLE_PAGES/2));
+    var startPage = current_page-pageRange;
+
+    if(startPage < 1){
+      startPage = 1;
+    }
+
+    var endPage = startPage + VISIBLE_PAGES-1;
+
+    if(endPage > num_pages){
+      startPage = num_pages-VISIBLE_PAGES+1;
+      endPage = num_pages;
+    }
 
     //Adds page links and makes page link for current page larger
-    for (let i = 1; i <= num_pages; i++) {
+    for (let i = startPage; i <= endPage; i++) {
       if (i === current_page)
         pages.push(
           <IconButton

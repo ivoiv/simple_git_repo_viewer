@@ -25,7 +25,7 @@ class App extends Component {
           <Route exact path='/frontpage/page/:number' component={FrontpageContainer}/>
 
           {/* If address field is incorrect, redirect automtailly to first of repositories*/}
-          <Route path='/' component={this.redirectToFirstPage}/>
+          <Redirect to='/frontpage/page/1' />
         </Switch>
       </ConnectedRouter>  
     );

@@ -24,7 +24,7 @@ const logger = createLogger()
 const store = createStore(
   connectRouter(history)(reducers),
   compose(
-    applyMiddleware(routerMiddleware(history)),
+   // applyMiddleware(routerMiddleware(history)),
     applyMiddleware(thunkMiddleware),
     applyMiddleware(logger), //Logger for debuging dispatch and state in console
     window.devToolsExtension ? window.devToolsExtension() : f => f //Console log and dev tooling
